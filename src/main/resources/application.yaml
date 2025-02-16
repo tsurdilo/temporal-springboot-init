@@ -1,4 +1,8 @@
 initializr:
+  group-id:
+    value: com.sample
+  artifact-id:
+    value: demo
   javaVersions:
     - id: 17
       default: true

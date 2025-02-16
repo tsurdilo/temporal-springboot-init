@@ -21,7 +21,7 @@ spring:
     #      max-instances: 10
     #      max-threads: 10
     workersAutoDiscovery:
-      packages: io.temporal.samples.springbo
+      packages: com.samples.demo
 # actuator (sdk metrics)
 management:
   endpoints:
