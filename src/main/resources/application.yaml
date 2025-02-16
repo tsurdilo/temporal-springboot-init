@@ -1,0 +1,58 @@
+initializr:
+  javaVersions:
+    - id: 17
+      default: true
+  languages:
+    - name: Java
+      id: java
+      default: true
+  packagings:
+    - name: Jar
+      id: jar
+      default: true
+    - name: War
+      id: war
+      default: false
+  bootVersions:
+    - id: 2.7.18
+      name: 2.7.18
+      default: false
+    - id: 3.4.2
+      name: 3.4.2
+      default: true
+  types:
+    - name: Maven Project
+      id: maven-project
+      description: Generate a Maven based project archive
+      tags:
+        build: maven
+        format: project
+      default: true
+      action: /starter.zip
+    - name: Gradle Project
+      id: gradle-project
+      description: Generate a Gradle based project archive
+      tags:
+        build: gradle
+        format: project
+      default: false
+      action: /starter.zip
+  dependencies:
+    - name: Temporal
+      content:
+        - name: Temporal
+          id: temporal
+          groupId: io.temporal
+          artifactId: temporal-spring-boot-starter
+          version: 1.27.1
+          description: Temporal SDK Spring Boot Starters
+    - name: Web
+      content:
+        - name: Web
+          id: web
+          description: Full-stack web development with Tomcat and Spring MVC
+    - name: Actuator
+      content:
+        - name: Actuator
+          id: actuator
+          description: Spring Boot Actuator
