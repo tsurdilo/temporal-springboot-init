@@ -16,6 +16,11 @@ public class DependencyCustomizer implements BuildCustomizer<MavenBuild> {
     public void customize(MavenBuild build) {
         build.dependencies().add("micrometer-registry-prometheus", "io.micrometer",
                 "micrometer-registry-prometheus", DependencyScope.RUNTIME);
-        build.dependencies().add("docker-compose", "org.springframework.boot", "spring-boot-docker-compose", DependencyScope.COMPILE);
+        build.dependencies().add("docker-compose", "org.springframework.boot",
+                "spring-boot-docker-compose", DependencyScope.COMPILE);
+        build.dependencies().add("micrometer-tracing-bridge-otel", "io.micrometer",
+                "micrometer-tracing-bridge-otel", DependencyScope.COMPILE);
+        build.dependencies().add("opentelemetry-exporter-otlpl", "io.opentelemetry",
+                "opentelemetry-exporter-otlp", DependencyScope.COMPILE);
     }
 }

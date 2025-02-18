@@ -5,9 +5,10 @@ spring:
     allow-bean-definition-overriding: true
   # temporal specific configs
   temporal:
-    namespace: default
+    namespace: ${tmprl.cloud.namespace}
     connection:
-      target: 127.0.0.1:7233
+      target: ${tmprl.cloud.target}
+      enable-https: true
     # (Note following configuration are not set by default but serve more as reference)
     #    workers:
     #      - task-queue: DemoTaskQueue
@@ -22,9 +23,31 @@ spring:
     #      max-threads: 10
     workersAutoDiscovery:
       packages: com.samples.demo
+  # docker deployment
+  docker:
+    compose:
+      enabled: true
+      file: docker-compose.yml
+# temporal cloud config
+tmprl:
+  cloud:
+   key: <your_api_key>
+   target: <your_cloud_target>
+   namespace: <your_cloud_namespace>
 # actuator (sdk metrics)
 management:
   endpoints:
     web:
       exposure:
         include: prometheus
+    health:
+      group:
+        liveness:
+          include: livenessstate,cacheCheck
+      probes:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+tracing:
+  url: http://localhost:4317
