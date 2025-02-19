@@ -1,6 +1,8 @@
 server:
   port: 8081
 spring:
+  application:
+    name: demo
   main:
     allow-bean-definition-overriding: true
   # temporal specific configs
@@ -22,7 +24,7 @@ spring:
     #      max-instances: 10
     #      max-threads: 10
     workersAutoDiscovery:
-      packages: com.samples.demo
+      packages: com.sample.demo
   # docker deployment
   docker:
     compose:
@@ -31,15 +33,15 @@ spring:
 # temporal cloud config
 tmprl:
   cloud:
-   key: <your_api_key>
-   target: <your_cloud_target>
-   namespace: <your_cloud_namespace>
+    key: eyJhbGciOiJFUzI1NiIsImtpZCI6Ild2dHdhQSJ9.eyJhY2NvdW50X2lkIjoiYTJkZDYiLCJhdWQiOlsidGVtcG9yYWwuaW8iXSwiZXhwIjoxNzQ3NjI3Mzc4LCJpc3MiOiJ0ZW1wb3JhbC5pbyIsImp0aSI6IkNUWlFOVko0dHM0em56VjBLOEZvTGxCeDF3RkFGRXpBIiwia2V5X2lkIjoiQ1RaUU5WSjR0czR6bnpWMEs4Rm9MbEJ4MXdGQUZFekEiLCJzdWIiOiI0YTA2MWE0MjU2ZGE0NzY5YmY2ZTU1ZTVhY2Q1Mzc5ZSJ9.KGcttqyjHgnKlxfkUVV9IttQyRkCkAzAnM0Tro2QPJpx2jJCGuIJH46PLsyZtfAilTeWVyVVvPH8ug54J7_bKQ
+    target: us-east-1.aws.api.temporal.io:7233
+    namespace: tihomirapikeys.a2dd6
 # actuator (sdk metrics)
 management:
   endpoints:
     web:
       exposure:
-        include: prometheus
+        include: prometheus,temporalworkerinfo
     health:
       group:
         liveness:
@@ -49,5 +51,6 @@ management:
   tracing:
     sampling:
       probability: 1.0
+    enabled: true
 tracing:
   url: http://localhost:4317
