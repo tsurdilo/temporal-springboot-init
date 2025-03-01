@@ -33,4 +33,9 @@ public class CustomProjectGenerationConfiguration {
     ProjectContributor addSourceProjectContributor() {
         return new CopyDirectoryProjectContributor("templates/temporal", "src/main/java/com/sample/demo");
     }
+
+    @Bean
+    ProjectContributor addReadmeProjectContributor() {
+        return new CopyFileProjectContributor("templates/README.md", "README.md");
+    }
 }

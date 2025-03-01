@@ -38,12 +38,12 @@ public class TaskQueueBacklogScheduler {
     public void publishTaskQueueBacklog() {
         List<String> taskQueues = new ArrayList<>();
         workersTemplate.getWorkers().forEach(w -> {
-            if(!taskQueues.contains(w.getTaskQueue())) {
+            if (!taskQueues.contains(w.getTaskQueue())) {
                 taskQueues.add(w.getTaskQueue());
             }
         });
 
-        for(String tq : taskQueues) {
+        for (String tq : taskQueues) {
             DescribeTaskQueueResponse resNonSticky = service.blockingStub().describeTaskQueue(DescribeTaskQueueRequest.newBuilder()
                     .setTaskQueue(TaskQueue.newBuilder()
                             .setName(tq)
@@ -60,6 +60,11 @@ public class TaskQueueBacklogScheduler {
             Map<String, String> tags = new HashMap<>();
             tags.put("namespace", namespace);
             tags.put("task-queue", tq);
+
+            System.out.println("************ ADDING BACKLOG!!!!!!");
+            System.out.println(resNonSticky.getVersionsInfoMap().values().iterator().next().getTypesInfoMap().get(1).getStats().getApproximateBacklogCount());
+            System.out.println(resNonSticky.getVersionsInfoMap().values().iterator().next().getTypesInfoMap().get(2).getStats().getApproximateBacklogCount());
+
 
             metricsScope.tagged(tags).gauge("workflow_task_backlog").update(
                     resNonSticky.getVersionsInfoMap().values().iterator().next().getTypesInfoMap().get(1).getStats().getApproximateBacklogCount()
