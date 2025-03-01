@@ -8,7 +8,9 @@ import io.temporal.client.WorkflowClientOptions;
 import io.temporal.serviceclient.SimpleSslContextBuilder;
 import io.temporal.serviceclient.WorkflowServiceStubsOptions;
 import io.temporal.spring.boot.TemporalOptionsCustomizer;
+import io.temporal.spring.boot.WorkerOptionsCustomizer;
 import io.temporal.worker.WorkerFactoryOptions;
+import io.temporal.worker.WorkerOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Nonnull;
 import javax.net.ssl.SSLException;
+import java.time.Duration;
 
 @Configuration
 public class TemporalOptionsConfig {
@@ -39,12 +42,6 @@ public class TemporalOptionsConfig {
             @Override
             public WorkflowClientOptions.Builder customize(
                     @Nonnull WorkflowClientOptions.Builder optionsBuilder) {
-//                System.out.println("******** 1TRACER: " + openTelemetry);
-//                OpenTracingShim.createTracerShim(openTelemetry);
-//                OpenTracingClientInterceptor openTracingClientInterceptor =
-//                        new OpenTracingClientInterceptor(
-//                                OpenTracingOptions.newBuilder().setTracer(OpenTracingShim.createTracerShim(openTelemetry)).build());
-//                optionsBuilder.setInterceptors(openTracingClientInterceptor);
                 return optionsBuilder;
             }
         };
@@ -57,13 +54,25 @@ public class TemporalOptionsConfig {
             @Override
             public WorkerFactoryOptions.Builder customize(
                     @Nonnull WorkerFactoryOptions.Builder optionsBuilder) {
-//                // set options on optionsBuilder as needed
-//                // ...
-//                System.out.println("******** 2TRACER: " + openTelemetry);
-//                OpenTracingWorkerInterceptor openTracingClientInterceptor =
-//                        new OpenTracingWorkerInterceptor(
-//                                OpenTracingOptions.newBuilder().setTracer(OpenTracingShim.createTracerShim(openTelemetry)).build());
-//                optionsBuilder.setWorkerInterceptors(openTracingClientInterceptor);
+                return optionsBuilder;
+            }
+        };
+    }
+
+    @Bean
+    public WorkerOptionsCustomizer customWorkerOptions() {
+        return new WorkerOptionsCustomizer() {
+            @Nonnull
+            @Override
+            public WorkerOptions.Builder customize(
+                    @Nonnull WorkerOptions.Builder optionsBuilder,
+                    @Nonnull String workerName,
+                    @Nonnull String taskQueue) {
+                optionsBuilder.setStickyTaskQueueDrainTimeout(Duration.ofSeconds(15));
+                optionsBuilder.setDisableEagerExecution(true);
+                optionsBuilder.setMaxConcurrentActivityExecutionSize(5);
+                optionsBuilder.setMaxConcurrentActivityTaskPollers(5);
+                optionsBuilder.setMaxTaskQueueActivitiesPerSecond(5);
                 return optionsBuilder;
             }
         };
@@ -91,6 +100,9 @@ public class TemporalOptionsConfig {
                                     new AuthorizationGrpcMetadataProvider(() -> "Bearer " + apiKey))
                             .setTarget(target);
                     optionsBuilder.setSslContext(SimpleSslContextBuilder.noKeyOrCertChain().setUseInsecureTrustManager(false).build());
+
+
+                    optionsBuilder.setRpcLongPollTimeout(Duration.ofSeconds(10));
                 } catch (SSLException e) {
                     return null;
                 }

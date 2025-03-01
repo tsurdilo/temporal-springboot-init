@@ -38,4 +38,14 @@ public class CustomProjectGenerationConfiguration {
     ProjectContributor addReadmeProjectContributor() {
         return new CopyFileProjectContributor("templates/README.md", "README.md");
     }
+
+    @Bean
+    ProjectContributor addHtmlResources() {
+        return new CopyDirectoryProjectContributor("templates/templates", "src/main/resources");
+    }
+
+    @Bean
+    ProjectContributor addStaticResources() {
+        return new CopyDirectoryProjectContributor("templates/js", "src/main/resources/static");
+    }
 }

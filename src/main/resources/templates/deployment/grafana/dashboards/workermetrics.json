@@ -102,7 +102,7 @@
             "uid": "P7AC1CE4626B85CB6"
           },
           "editorMode": "code",
-          "expr": "sum(rate(temporal_request_total{operation=\"StartWorkflowExecution\"}[1m])) by (namespace, operation)",
+          "expr": "sum(avg_over_time(temporal_request_total{operation=\"StartWorkflowExecution\"}[1m])) by (namespace, operation)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -166,32 +166,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "NS: tihomirapikeys.a2dd6"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -216,7 +191,7 @@
         {
           "datasource": "Temporal Prometheus",
           "editorMode": "code",
-          "expr": "sum(rate(temporal_workflow_completed_total[1m])) by (namespace) or vector(0)",
+          "expr": "sum(avg_over_time(temporal_workflow_completed_total[1m])) by (namespace) or vector(0)",
           "legendFormat": "NS: {{namespace}}",
           "range": true,
           "refId": "A"
@@ -1232,7 +1207,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "{namespace=\"tihomirapikeys.a2dd6\", task_queue=\"demoqueue\"}"
+                  "{namespace=\"tihomirapikeys.a2dd6\", task_queue=\"demoqueue-two\"}"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -1349,7 +1324,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "{namespace=\"tihomirapikeys.a2dd6\", task_queue=\"demoqueue\"}"
+                  "{namespace=\"tihomirapikeys.a2dd6\", task_queue=\"demoqueue-two\"}"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -1431,7 +1406,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},

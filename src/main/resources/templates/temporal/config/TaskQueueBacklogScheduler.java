@@ -61,16 +61,11 @@ public class TaskQueueBacklogScheduler {
             tags.put("namespace", namespace);
             tags.put("task-queue", tq);
 
-            System.out.println("************ ADDING BACKLOG!!!!!!");
-            System.out.println(resNonSticky.getVersionsInfoMap().values().iterator().next().getTypesInfoMap().get(1).getStats().getApproximateBacklogCount());
-            System.out.println(resNonSticky.getVersionsInfoMap().values().iterator().next().getTypesInfoMap().get(2).getStats().getApproximateBacklogCount());
-
-
             metricsScope.tagged(tags).gauge("workflow_task_backlog").update(
                     resNonSticky.getVersionsInfoMap().values().iterator().next().getTypesInfoMap().get(1).getStats().getApproximateBacklogCount()
             );
             metricsScope.tagged(tags).gauge("activity_task_backlog").update(
-                    resNonSticky.getVersionsInfoMap().values().iterator().next().getTypesInfoMap().get(1).getStats().getApproximateBacklogCount()
+                    resNonSticky.getVersionsInfoMap().values().iterator().next().getTypesInfoMap().get(2).getStats().getApproximateBacklogCount()
             );
         }
     }

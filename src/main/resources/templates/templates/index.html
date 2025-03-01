@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: samples-header"></head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Replay 2025 - Demo Application</h5>
+            <div class="list-group">
+                <a href="http://localhost:8081/actuator/prometheus" class="list-group-item list-group-item-action"
+                   target="_blank">Prometheus Metrics</a>
+            </div>
+            <div class="list-group">
+                <a href="http://localhost:8085/" class="list-group-item list-group-item-action" target="_blank">SDK
+                    Metrics Dashboard</a>
+            </div>
+            <div class="list-group">
+                <a href="http://localhost:16686/" class="list-group-item list-group-item-action" target="_blank">OTEL
+                    Traces</a>
+            </div>
+            <div class="list-group">
+                <a href="http://localhost:8081/actuator/temporalworkerinfo"
+                   class="list-group-item list-group-item-action" target="_blank">Worker Info Endpoint</a>
+            </div>
+            <div class="list-group">
+                <a href="http://localhost:8081/actuator/temporalworkerinfo"
+                   class="list-group-item list-group-item-action" target="_blank">Worker Info Endpoint</a>
+            </div>
+            <div class="list-group">
+                <a href="http://localhost:8081/actuator/scheduledtasks" class="list-group-item list-group-item-action"
+                   target="_blank">Backlog Count Scheduled Endpoint</a>
+            </div>
+            <div class="list-group">
+                <a href="/rundemo" class="list-group-item list-group-item-action">Run Demo Workflows</a>
+            </div>
+            <div class="list-group">
+                <a href="/rundemotwo" class="list-group-item list-group-item-action">Run Demo Two Workflows</a>
+            </div>
+            <div class="list-group">
+                <a href="http://localhost:8081/actuator/shutdown" class="list-group-item list-group-item-action">Graceful
+                    Worker Shutdown</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

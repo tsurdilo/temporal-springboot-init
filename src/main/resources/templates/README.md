@@ -15,3 +15,8 @@
 5. View Grafana - http://localhost:8085/
 6. View Jaeger Traces - http://localhost:16686/
 7. View Worker Actuator endpoint - http://localhost:8081/actuator/temporalworkerinfo
+
+
+# Graceful shutdown
+
+      curl 'http://localhost:8081/actuator/shutdown' -i -X POST

@@ -60,3 +60,8 @@ initializr:
         - name: Actuator
           id: actuator
           description: Spring Boot Actuator
+    - name: Thymeleaf
+      content:
+        - name: Thymeleaf
+          id: thymeleaf
+          description: Themyleaf Starter

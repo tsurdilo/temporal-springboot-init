@@ -1,5 +1,6 @@
 server:
   port: 8081
+  shutdown: graceful
 spring:
   application:
     name: demo
@@ -11,20 +12,14 @@ spring:
     connection:
       target: ${tmprl.cloud.target}
       enable-https: true
-    # (Note following configuration are not set by default but serve more as reference)
-    #    workers:
-    #      - task-queue: DemoTaskQueue
-    #        capacity:
-    #          max-concurrent-workflow-task-pollers: 6
-    #          max-concurrent-activity-task-pollers: 6
-    #        rate-limits:
-    #          max-worker-activities-per-second: 3
-    #          max-task-queue-activities-per-second: 3
-    #    workflow-cache:
-    #      max-instances: 10
-    #      max-threads: 10
     workersAutoDiscovery:
       packages: com.sample.demo
+    workers:
+      - task-queue: demoqueue-two
+        capacity:
+          max-concurrent-activity-executors: 2
+        rate-limits:
+          max-worker-activities-per-second: 2
   # docker deployment
   docker:
     compose:
@@ -41,7 +36,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: prometheus,temporalworkerinfo
+        include: prometheus,temporalworkerinfo,scheduledtasks,shutdown
     health:
       group:
         liveness:
@@ -52,5 +47,8 @@ management:
     sampling:
       probability: 1.0
     enabled: true
+  endpoint:
+    shutdown:
+      access: unrestricted
 tracing:
   url: http://localhost:4317
