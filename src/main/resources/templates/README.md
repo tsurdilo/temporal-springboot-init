@@ -5,17 +5,13 @@
         mvn clean install spring-boot:run
 
 # How to use
-1. Start new workflow exec 
-
-        curl -X GET "http://localhost:8081/hello/path1"
-
-2. View Workflow exec - https://cloud.temporal.io/namespaces/tihomirapikeys.a2dd6/workflows
-3. View raw metrics: http://localhost:8081/actuator/prometheus
-4. View Prometheus Targets - http://localhost:9090/targets?search=
-5. View Grafana - http://localhost:8085/
-6. View Jaeger Traces - http://localhost:16686/
-7. View Worker Actuator endpoint - http://localhost:8081/actuator/temporalworkerinfo
-
+1. Start new workflow executions - http://localhost:8081
+2. Prometheus Metrics: http://localhost:8081/actuator/prometheus
+3. Prometheus Targets - http://localhost:9090/targets?search=
+4. Grafana Dashboard - http://localhost:8085/
+5. Jaeger Traces - http://localhost:16686/
+6. Worker Actuator endpoint - http://localhost:8081/actuator/temporalworkerinfo
+7. Actuator Scheduled Tasks (Backlog count custom metric) - http://localhost:8081/actuator/scheduledtasks
 
 # Graceful shutdown
 
