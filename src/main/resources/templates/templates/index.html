@@ -7,41 +7,57 @@
         <div class="card-body">
             <h5 class="card-title">Replay 2025 - Demo Application</h5>
             <div class="list-group">
+                <a href="/rundemo" class="list-group-item list-group-item-action">1) Run Demo Workflows</a>
+            </div>
+            <div class="list-group">
+                <a href="/rundemotwo" class="list-group-item list-group-item-action">2) Run Demo Two Workflows</a>
+            </div>
+
+            <div class="list-group">
                 <a href="http://localhost:8081/actuator/prometheus" class="list-group-item list-group-item-action"
-                   target="_blank">Prometheus Metrics</a>
+                   target="_blank">3) Actuator Metrics</a>
             </div>
             <div class="list-group">
-                <a href="http://localhost:8085/" class="list-group-item list-group-item-action" target="_blank">SDK
-                    Metrics Dashboard</a>
+                <a href="http://localhost:8085/" class="list-group-item list-group-item-action" target="_blank">4) Grafana Dashboard</a>
             </div>
             <div class="list-group">
-                <a href="http://localhost:16686/" class="list-group-item list-group-item-action" target="_blank">OTEL
+                <a href="http://localhost:16686/" class="list-group-item list-group-item-action" target="_blank">5) Jaeger OTEL
                     Traces</a>
             </div>
             <div class="list-group">
                 <a href="http://localhost:8081/actuator/temporalworkerinfo"
-                   class="list-group-item list-group-item-action" target="_blank">Worker Info Endpoint</a>
-            </div>
-            <div class="list-group">
-                <a href="http://localhost:8081/actuator/temporalworkerinfo"
-                   class="list-group-item list-group-item-action" target="_blank">Worker Info Endpoint</a>
+                   class="list-group-item list-group-item-action" target="_blank">6) Actuator Worker Info Endpoint</a>
             </div>
             <div class="list-group">
                 <a href="http://localhost:8081/actuator/scheduledtasks" class="list-group-item list-group-item-action"
-                   target="_blank">Backlog Count Scheduled Endpoint</a>
+                   target="_blank">7) Actuator Backlog Count Scheduled Endpoint</a>
             </div>
+
             <div class="list-group">
-                <a href="/rundemo" class="list-group-item list-group-item-action">Run Demo Workflows</a>
-            </div>
-            <div class="list-group">
-                <a href="/rundemotwo" class="list-group-item list-group-item-action">Run Demo Two Workflows</a>
-            </div>
-            <div class="list-group">
-                <a href="http://localhost:8081/actuator/shutdown" class="list-group-item list-group-item-action">Graceful
-                    Worker Shutdown</a>
+                <form action="/actuator/shutdown", id="sampleform">
+                    <input type="submit" value="Graceful Worker Shutdown" class="btn btn-primary" />
+                </form>
+                <div id="result"></div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $("#sampleform").submit(function( event ) {
+        event.preventDefault();
+
+        var $form = $( this ),
+            url = $form.attr( "action" );
+        $.ajax({
+            'url': url,
+            'method':'POST',
+            // 'dataType': 'json',
+            // 'contentType': 'application/json',
+            success: function(response) {
+                $( "#result" ).empty().append( response );
+            }
+        });
+    });
+</script>
 </body>
 </html>
