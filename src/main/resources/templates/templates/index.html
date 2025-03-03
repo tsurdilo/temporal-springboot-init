@@ -7,26 +7,26 @@
         <div class="card-body">
             <h5 class="card-title">Replay 2025 - Demo Application</h5>
             <div class="list-group">
-                <a href="/rundemo" class="list-group-item list-group-item-action">1) Run Demo Workflows</a>
+                <a href="http://localhost:8081/actuator/temporalworkerinfo"
+                   class="list-group-item list-group-item-action" target="_blank">1) Actuator Worker Info Endpoint</a>
             </div>
             <div class="list-group">
-                <a href="/rundemotwo" class="list-group-item list-group-item-action">2) Run Demo Two Workflows</a>
+                <a href="/rundemo" class="list-group-item list-group-item-action">2) Simple Rest Workflow</a>
+            </div>
+            <div class="list-group">
+                <a href="/rundemotwo" class="list-group-item list-group-item-action">3) Batch Processing Workflow with Server-Sent Events </a>
             </div>
 
             <div class="list-group">
                 <a href="http://localhost:8081/actuator/prometheus" class="list-group-item list-group-item-action"
-                   target="_blank">3) Actuator Metrics</a>
+                   target="_blank">4) Actuator Metrics</a>
             </div>
             <div class="list-group">
-                <a href="http://localhost:8085/" class="list-group-item list-group-item-action" target="_blank">4) Grafana Dashboard</a>
+                <a href="http://localhost:8085/" class="list-group-item list-group-item-action" target="_blank">5) Grafana Dashboard</a>
             </div>
             <div class="list-group">
-                <a href="http://localhost:16686/" class="list-group-item list-group-item-action" target="_blank">5) Jaeger OTEL
+                <a href="http://localhost:16686/" class="list-group-item list-group-item-action" target="_blank">6) Jaeger OTEL
                     Traces</a>
-            </div>
-            <div class="list-group">
-                <a href="http://localhost:8081/actuator/temporalworkerinfo"
-                   class="list-group-item list-group-item-action" target="_blank">6) Actuator Worker Info Endpoint</a>
             </div>
             <div class="list-group">
                 <a href="http://localhost:8081/actuator/scheduledtasks" class="list-group-item list-group-item-action"
