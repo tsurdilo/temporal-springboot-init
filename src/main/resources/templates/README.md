@@ -16,3 +16,12 @@
 # Graceful shutdown
 
       curl 'http://localhost:8081/actuator/shutdown' -i -X POST
+
+# Slides 
+    
+      https://docs.google.com/presentation/d/1ddulpBes9kQaDT8lclgLmfSh8-6LTKBjXCwakUiz_Ww/edit?usp=sharing
+
+# Slides - Web version
+
+      https://docs.google.com/presentation/d/e/2PACX-1vTXn9vFomZl9pOHc_rWjJygyr5pEtGinSyE3nOX4EVQwJ5s77KEklKfirc_cGI5UQIZHd8DLKOPww_I/pub?start=true&loop=true&delayms=30000
+
