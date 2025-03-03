@@ -48,4 +48,19 @@ public class CustomProjectGenerationConfiguration {
     ProjectContributor addStaticResources() {
         return new CopyDirectoryProjectContributor("templates/js", "src/main/resources/static");
     }
+
+    @Bean
+    ProjectContributor deleteDefaultTestProjectContributor() {
+        return new DeleteFileProjectContributor("src/test/java/com/sample/demo/DemoApplicationTests.java");
+    }
+
+//    @Bean
+//    ProjectContributor addWorkflowTestProjectContributor() {
+//        return new CopyFileProjectContributor("templates/testing/HelloWorkflowTest.java", "src/test/java/com/sample/demo/HelloWorkflowTest.java");
+//    }
+//
+//    @Bean
+//    ProjectContributor addTestAppPropsProjectContributor() {
+//        return new CopyFileProjectContributor("templates/testing/application.yaml", "src/test/resources/application.yaml");
+//    }
 }

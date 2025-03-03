@@ -1,5 +1,9 @@
 # Temporal Spring Boot Demo Application
 
+# GitHub Repo
+
+        https://github.com/tsurdilo/temporal-springboot-init
+
 # Build
 
         mvn clean install spring-boot:run
@@ -16,6 +20,8 @@
 # Graceful shutdown
 
       curl 'http://localhost:8081/actuator/shutdown' -i -X POST
+
+You can also initiate graceful shutdown from http://localhost:8081
 
 # Slides 
     

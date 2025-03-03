@@ -21,19 +21,19 @@ public class MessageWorkflowImpl implements MessageWorkflow {
     @Override
     public void sendMessages(String message) {
 
-        for(int i=0;i<3;i++) {
+        for (int i = 0; i < 3; i++) {
             sendMessageBatch(i, message);
         }
     }
 
     private void sendMessageBatch(int i, String message) {
         List<Promise<Void>> messagePromises = new ArrayList<>();
-        for(int j = 0; j< 50; j++) {
-            messagePromises.add(Async.procedure(activity::sendMessage, message + "-" + i + "-" + j));
+        for (int j = 0; j < 20; j++) {
+            messagePromises.add(Async.procedure(activity::sendMessage, "Id: " + i + "" + j + " Message: " + message ));
         }
         Promise.allOf(messagePromises).get();
-        for(Promise<Void> p : messagePromises) {
-            if(p.getFailure() != null) {
+        for (Promise<Void> p : messagePromises) {
+            if (p.getFailure() != null) {
                 System.out.println("Error sending message: " + p.getFailure().getMessage());
             } else {
                 p.get();
